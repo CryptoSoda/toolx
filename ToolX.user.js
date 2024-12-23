@@ -630,7 +630,7 @@ let CoinsAggregateMixin = Base => class extends Base {
     // удалить монеты которых уже нет на странице
     removeOldCoins() {
         let time = new Date().getTime()
-        let interval_delete = 5000;
+        let interval_delete = 50000;
         for (let i in ToolX.coins) {
             if ((time - ToolX.coins[i].time) < interval_delete) {
                 continue;
@@ -900,7 +900,7 @@ class BullX extends CoinsAggregateMixin(CoinMixin(ToolXService)) {
         if (!coin) {
             alert('Coin not found!');
         }
-        let chainId = location.match(/chainId=(\d+?)/)[1]
+        let chainId = location.match(/chainId=(\d+)/)[1]
         coin= coin[1]
 
         this.current_token = {
