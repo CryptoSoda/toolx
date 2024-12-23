@@ -17,7 +17,6 @@
 // @grant    GM.notification
 // @grant    GM.getValue
 // ==/UserScript==
-
 // START: init.js-------------------------------------------------------
 
 // сообщать ли о новых монетах звуковым сигналом
@@ -1081,7 +1080,7 @@ class BullX extends CoinsAggregateMixin(CoinMixin(ToolXService)) {
 
 // END: BullX.js-------------------------------------------------------
 // START: DexScreener.js-------------------------------------------------------
-
+ 
 
 class DexScreener extends CoinsAggregateMixin(CoinMixin(ToolXService)) {
     constructor() {
@@ -1489,7 +1488,16 @@ align-items: center;
         console.log('toolX new ', this.count_new);
         // this.getTrades()
     }
-
+    removeOldCoins() {
+        let time = new Date().getTime()
+        let interval_delete = 120000;
+        for (let i in ToolX.coins) {
+            if ((time - ToolX.coins[i].time) < interval_delete) {
+                continue;
+            }
+            delete ToolX.coins[i]
+        }
+    }
 
     eachCoinsInPage(coll_id, row) {
 
@@ -1606,7 +1614,7 @@ class Virtuals  extends CoinMixin(ToolXService) {
             }
         })
     }
-
+ 
 
 
 
